@@ -4,10 +4,13 @@ import Output from './output';
 
 class ResultBlock extends React.Component {
     render() {
-        const values = this.props.values.map((item, i) => <Output key={ i } { ...item } />);
+        const decimalPlaces = this.props.decimalPlaces;
+        const values = this.props.values.map((item, i) => {
+            return <Output key={ i } { ...item } decimalPlaces={decimalPlaces}/>;
+        });
 
         return (
-            <table style={ { borderSpacing: '1px' } }>
+            <table className="b-output-table">
                 <tr>
                     <th>Характеристика</th>
                     <th>Значение</th>

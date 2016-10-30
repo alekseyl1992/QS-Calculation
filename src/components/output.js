@@ -6,7 +6,7 @@ class Output extends React.Component {
         return (
             <tr>
                 <td style={ { padding: '5px' } }>{ this.props.label }</td>
-                <td style={ { padding: '5px' } }>{ this.props.value }</td>
+                <td style={ { padding: '5px' } }>{ this.props.value.toFixed(this.props.decimalPlaces) }</td>
             </tr>
         );
     }
@@ -14,7 +14,8 @@ class Output extends React.Component {
 
 Output.PropTypes = {
     label: PropTypes.string,
-    value: PropTypes.any
+    value: PropTypes.any,
+    decimalPlaces: PropTypes.number
 };
 
 export default Output;

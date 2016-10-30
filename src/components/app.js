@@ -14,18 +14,19 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            N: 10,
+            N: 100,
             T0: 50,
-            Tp: 50,
+            Tp: 100,
             tk: 1,
             C: 1,
             tpr: 10,
             D: 2,
-            td: 20,
+            td: 10,
             P: 0.5,
             K1: 0.995,
             K2: 100,
-            delta: 0.05
+            delta: 0.05,
+            decimalPlaces: 3
         };
         this.onChange = this.onChange.bind(this);
         this.execute = this.execute.bind(this);
@@ -138,8 +139,9 @@ class App extends React.Component {
     render() {
         return (
             <div className="container-fluid">
-                <div className="col-md-12 row">
-                    <div className="col-md-3">
+                <div className="row">
+                    <h2 className="text-center">Аналитическая модель</h2>
+                    <form className="col-md-6 form-horizontal">
                         <LabeledInput label="Количество рабочих станций"
                                       onChange={ this.onChange }
                                       value={ this.state.N }
@@ -200,15 +202,20 @@ class App extends React.Component {
                                       value={ this.state.delta }
                                       option="delta"
                         />
-
-                    </div>
-                    <div className="col-md-5 col-md-offset-2">
+                        <LabeledInput label="Знаков после запятой"
+                                      onChange={ this.onChange }
+                                      value={ this.state.decimalPlaces }
+                                      option="decimalPlaces"
+                        />
+                        <div className="btn btn-primary col-md-12" onClick={ this.execute }>Вычислить</div>
+                    </form>
+                    <div className="col-md-5 col-md-offset-1">
                         { !this.ready() && <div className="alert alert-warning">Заполните все входные параметры</div> }
-                        <div className="btn btn-success col-md-12" onClick={ this.execute }>Посчитать</div>
+                        
 
                         {
                             this.state.showResult &&
-                            <ResultBlock values={ this.state.results } />
+                            <ResultBlock values={ this.state.results } decimalPlaces={ this.state.decimalPlaces } />
                         }
                     </div>
                 </div>

@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-
+import _ from 'lodash';
 
 class LabeledInput extends React.Component {
     constructor(props) {
@@ -13,14 +13,19 @@ class LabeledInput extends React.Component {
     }
 
     render() {
+        let id = _.uniqueId('input-');
+
         return (
-            <div className="form-group col-md-12">
-                <label>{ this.props.label }: </label>
-                <input onChange={ this.onChange }
-                       type="number" ref="input"
-                       className="form-control"
-                       value={ this.props.value }
-                />
+            <div className="form-group">
+                <label className="col-md-6 control-label" htmlFor={id}>{ this.props.label }: </label>
+                <div className="col-md-6">
+                    <input id={id}
+                           onChange={ this.onChange }
+                           type="number" ref="input"
+                           className="form-control"
+                           value={ this.props.value }
+                    />
+                </div>
             </div>
         );
     }
